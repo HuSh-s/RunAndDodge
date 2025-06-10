@@ -23,7 +23,7 @@ public class Character_Child : MonoBehaviour
     {
         if (other.CompareTag("SpikeBox"))
         {
-            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().CurrentCharacterCount--;
+            GameManager.CurrentCharacterCount--;
             gameObject.SetActive(false);
         }
     }

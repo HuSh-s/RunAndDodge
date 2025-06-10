@@ -6,6 +6,10 @@ TagManager:
   tags:
   - GameManager
   - SpikeBox
+  - Multiply
+  - Add
+  - Sub
+  - Divide
   layers:
   - Default
   - TransparentFX
