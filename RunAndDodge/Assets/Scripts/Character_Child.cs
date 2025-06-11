@@ -23,7 +23,9 @@ public class Character_Child : MonoBehaviour
     {
         if (other.CompareTag("SpikeBox"))
         {
-            GameManager.CurrentCharacterCount--;
+            Vector3 newPos = new Vector3(transform.position.x, .23f, transform.position.z);
+
+            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestroyEffect_Create(newPos);
             gameObject.SetActive(false);
         }
     }

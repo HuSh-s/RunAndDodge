@@ -3,13 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 using Semih;
+using Unity.VisualScripting;
+using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
     public GameObject DestinationPoint;
     public static int CurrentCharacterCount = 1;
-
     public List<GameObject> Characters;
+    public List<GameObject> CreateEffects;
+    public List<GameObject> DestroyEffects;
 
     void Start()
     {
@@ -26,20 +29,35 @@ public class GameManager : MonoBehaviour
         switch (OperationType)
         {
             case "Multiply":
-                Math_Operations.Multiply(GetNumber, Characters, position_);
+                Math_Operations.Multiply(GetNumber, Characters, position_, CreateEffects);
                 break;
 
             case "Add":
-                Math_Operations.Add(GetNumber, Characters, position_);
+                Math_Operations.Add(GetNumber, Characters, position_, CreateEffects);
                 break;
 
             case "Sub":
-                Math_Operations.Sub(GetNumber, Characters);
+                Math_Operations.Sub(GetNumber, Characters, DestroyEffects);
                 break;
 
             case "Divide":
-                Math_Operations.Divide(GetNumber, Characters);
+                Math_Operations.Divide(GetNumber, Characters, DestroyEffects);
                 break;
+        }
+    }
+
+    public void DestroyEffect_Create(Vector3 position_)
+    {
+        foreach (var item in DestroyEffects)
+        {
+            if (!item.activeInHierarchy)
+            {
+                item.SetActive(true);
+                item.transform.position = position_;
+                item.GetComponent<ParticleSystem>().Play();
+                CurrentCharacterCount--;
+                break;
+            }
         }
     }
 }
