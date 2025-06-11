@@ -28,5 +28,13 @@ public class Character_Child : MonoBehaviour
             GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestroyEffect_Create(newPos);
             gameObject.SetActive(false);
         }
+
+        if (other.CompareTag("Saw"))
+        {
+            Vector3 newPos = new Vector3(transform.position.x, .23f, transform.position.z);
+
+            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestroyEffect_Create(newPos);
+            gameObject.SetActive(false);
+        }
     }
 }
