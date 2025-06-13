@@ -361,6 +361,9 @@
 "Assets/Scripts/Character_Child.cs"
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/Library.cs"
+"Assets/Scripts/ManMark.cs"
+"Assets/Scripts/Propeller.cs"
+"Assets/Scripts/Wind.cs"
 -langversion:9.0
 /deterministic
 /optimize+

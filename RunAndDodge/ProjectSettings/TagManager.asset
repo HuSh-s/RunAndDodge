@@ -11,6 +11,9 @@ TagManager:
   - Sub
   - Divide
   - Saw
+  - PropellerSpikes
+  - CharChild
+  - Hammer
   layers:
   - Default
   - TransparentFX

@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public List<GameObject> Characters;
     public List<GameObject> CreateEffects;
     public List<GameObject> DestroyEffects;
+    public List<GameObject> ManMarkEffects;
 
     void Start()
     {
@@ -46,7 +47,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void DestroyEffect_Create(Vector3 position_)
+    public void DestroyEffect_Create(Vector3 position_, bool Hammer = false)
     {
         foreach (var item in DestroyEffects)
         {
@@ -57,6 +58,20 @@ public class GameManager : MonoBehaviour
                 item.GetComponent<ParticleSystem>().Play();
                 CurrentCharacterCount--;
                 break;
+            }
+        }
+
+        if (Hammer)
+        {
+            Vector3 newPos = new Vector3(position_.x, .005f, position_.z);
+            foreach (var item in ManMarkEffects)
+            {
+                if (!item.activeInHierarchy)
+                {
+                    item.SetActive(true);
+                    item.transform.position = newPos;
+                    break;
+                }
             }
         }
     }
