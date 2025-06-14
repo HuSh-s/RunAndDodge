@@ -6,6 +6,7 @@ using UnityEngine;
 public class Character : MonoBehaviour
 {
     public GameManager _GameManager;
+    public GameObject Cam;
 
     void Start()
     {
@@ -38,6 +39,10 @@ public class Character : MonoBehaviour
         {
             int number = int.Parse(other.name);
             _GameManager.ManManager(other.tag, number, other.transform);
+        }
+        else if(other.CompareTag("FinishTrigger"))
+        {
+            Cam.GetComponent<Camera_>().ReachEnd = true;
         }
     }
 }

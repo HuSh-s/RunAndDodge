@@ -14,10 +14,20 @@ public class GameManager : MonoBehaviour
     public List<GameObject> CreateEffects;
     public List<GameObject> DestroyEffects;
     public List<GameObject> ManMarkEffects;
+    public List<GameObject> Enemys;
+    public int HowMuchEnemy;
 
     void Start()
     {
+        CreateEnemy();
+    }
 
+    public void CreateEnemy()
+    {
+        for (int i = 0; i < HowMuchEnemy; i++)
+        {
+            Enemys[i].SetActive(true);
+        }
     }
 
     void Update()
