@@ -30,6 +30,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void EnemyTrigger()
+    {
+        foreach (var item in Enemys)
+        {
+            if (item.activeInHierarchy)
+            {
+                item.GetComponent<Enemy>().Animation_Trigger();
+            }
+        }
+    }
+
     void Update()
     {
 

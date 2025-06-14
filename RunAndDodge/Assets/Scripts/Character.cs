@@ -2,11 +2,14 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 public class Character : MonoBehaviour
 {
     public GameManager _GameManager;
     public GameObject Cam;
+    public bool ReachEnd;
+    public GameObject CharDestination;
 
     void Start()
     {
@@ -15,20 +18,30 @@ public class Character : MonoBehaviour
 
     private void FixedUpdate()
     {
-        transform.Translate(Vector3.forward * 1f * Time.deltaTime);
+        if (!ReachEnd)
+        {
+            transform.Translate(Vector3.forward * 1f * Time.deltaTime);
+        }
     }
     void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0))
+        if (ReachEnd)
         {
-            if (Input.GetAxis("Mouse X") < 0)
+            transform.position = Vector3.Lerp(transform.position, CharDestination.transform.position, .015f);
+        }
+        else
+        {
+            if (Input.GetKey(KeyCode.Mouse0))
             {
-                transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x - .1f, transform.position.y, transform.position.z), .3f);
-            }
+                if (Input.GetAxis("Mouse X") < 0)
+                {
+                    transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x - .1f, transform.position.y, transform.position.z), .3f);
+                }
 
-            if (Input.GetAxis("Mouse X") > 0)
-            {
-                transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x + .1f, transform.position.y, transform.position.z), .3f);
+                if (Input.GetAxis("Mouse X") > 0)
+                {
+                    transform.position = Vector3.Lerp(transform.position, new Vector3(transform.position.x + .1f, transform.position.y, transform.position.z), .3f);
+                }
             }
         }
     }
@@ -43,6 +56,8 @@ public class Character : MonoBehaviour
         else if(other.CompareTag("FinishTrigger"))
         {
             Cam.GetComponent<Camera_>().ReachEnd = true;
+            _GameManager.EnemyTrigger();
+            ReachEnd = true;
         }
     }
 }
