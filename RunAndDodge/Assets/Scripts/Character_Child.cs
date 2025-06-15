@@ -5,13 +5,13 @@ using UnityEngine.AI;
 
 public class Character_Child : MonoBehaviour
 {
-    GameObject Target;
     NavMeshAgent _Navmesh;
+    public GameManager _GameManager;
+    public GameObject Target;
 
     void Start()
     {
         _Navmesh = GetComponent<NavMeshAgent>();
-        Target = GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestinationPoint;
     }
 
     private void LateUpdate()
@@ -19,37 +19,40 @@ public class Character_Child : MonoBehaviour
         _Navmesh.SetDestination(Target.transform.position);
     }
 
+    Vector3 GivePosition()
+    {
+        return new Vector3(transform.position.x, .23f, transform.position.z);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("SpikeBox"))
         {
-            Vector3 newPos = new Vector3(transform.position.x, .23f, transform.position.z);
-
-            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestroyEffect_Create(newPos);
+            _GameManager.DestroyEffect_Create(GivePosition());
             gameObject.SetActive(false);
         }
 
-        if (other.CompareTag("Saw"))
+        else if (other.CompareTag("Saw"))
         {
-            Vector3 newPos = new Vector3(transform.position.x, .23f, transform.position.z);
-
-            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestroyEffect_Create(newPos);
+            _GameManager.DestroyEffect_Create(GivePosition());
             gameObject.SetActive(false);
         }
         
-        if (other.CompareTag("PropellerSpikes"))
+        else if (other.CompareTag("PropellerSpikes"))
         {
-            Vector3 newPos = new Vector3(transform.position.x, .23f, transform.position.z);
-
-            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestroyEffect_Create(newPos);
+            _GameManager.DestroyEffect_Create(GivePosition());
             gameObject.SetActive(false);
         }
 
-        if (other.CompareTag("Hammer"))
+        else if (other.CompareTag("Hammer"))
         {
-            Vector3 newPos = new Vector3(transform.position.x, .23f, transform.position.z);
+            _GameManager.DestroyEffect_Create(GivePosition(), true);
+            gameObject.SetActive(false);
+        }
 
-            GameObject.FindWithTag("GameManager").GetComponent<GameManager>().DestroyEffect_Create(newPos,true);
+        else if (other.CompareTag("Enemy"))
+        {
+            _GameManager.DestroyEffect_Create(GivePosition(), false, false);
             gameObject.SetActive(false);
         }
     }

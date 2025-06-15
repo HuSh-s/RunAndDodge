@@ -8,7 +8,6 @@ using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject DestinationPoint;
     public static int CurrentCharacterCount = 1;
     public List<GameObject> Characters;
     public List<GameObject> CreateEffects;
@@ -16,6 +15,8 @@ public class GameManager : MonoBehaviour
     public List<GameObject> ManMarkEffects;
     public List<GameObject> Enemys;
     public int HowMuchEnemy;
+    public GameObject MainChar;
+    public bool GameFinished;
 
     void Start()
     {
@@ -46,6 +47,40 @@ public class GameManager : MonoBehaviour
 
     }
 
+    void WarState()
+    {
+        if (CurrentCharacterCount == 1 || HowMuchEnemy == 0)
+        {
+            GameFinished = true;
+            foreach(var item in Enemys)
+            {
+                if (item.activeInHierarchy)
+                {
+                    item.GetComponent<Animator>().SetBool("Attack", false);
+                }
+            }
+
+            foreach (var item in Characters)
+            {
+                if (item.activeInHierarchy)
+                {
+                    item.GetComponent<Animator>().SetBool("Attack", false);
+                }
+            }
+
+            MainChar.GetComponent<Animator>().SetBool("Attack", false);
+
+            if (CurrentCharacterCount < HowMuchEnemy || CurrentCharacterCount == HowMuchEnemy)
+            {
+                Debug.Log("kaybettin");
+            }
+            else
+            {
+                Debug.Log("kazanadýn");
+            }
+        }
+    }
+
     public void ManManager(string OperationType, int GetNumber, Transform position_)
     {
         switch (OperationType)
@@ -68,7 +103,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void DestroyEffect_Create(Vector3 position_, bool Hammer = false)
+    public void DestroyEffect_Create(Vector3 position_, bool Hammer = false, bool State_ = false)
     {
         foreach (var item in DestroyEffects)
         {
@@ -77,7 +112,10 @@ public class GameManager : MonoBehaviour
                 item.SetActive(true);
                 item.transform.position = position_;
                 item.GetComponent<ParticleSystem>().Play();
-                CurrentCharacterCount--;
+                if (!State_)
+                    CurrentCharacterCount--;
+                else
+                    HowMuchEnemy--;
                 break;
             }
         }
@@ -94,6 +132,11 @@ public class GameManager : MonoBehaviour
                     break;
                 }
             }
+        }
+
+        if (!GameFinished)
+        {
+            WarState();
         }
     }
 }

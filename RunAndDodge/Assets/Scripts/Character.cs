@@ -7,7 +7,7 @@ using static UnityEngine.GraphicsBuffer;
 public class Character : MonoBehaviour
 {
     public GameManager _GameManager;
-    public GameObject Cam;
+    public Camera_ Cam;
     public bool ReachEnd;
     public GameObject CharDestination;
 
@@ -55,7 +55,7 @@ public class Character : MonoBehaviour
         }
         else if(other.CompareTag("FinishTrigger"))
         {
-            Cam.GetComponent<Camera_>().ReachEnd = true;
+            Cam.ReachEnd = true;
             _GameManager.EnemyTrigger();
             ReachEnd = true;
         }
