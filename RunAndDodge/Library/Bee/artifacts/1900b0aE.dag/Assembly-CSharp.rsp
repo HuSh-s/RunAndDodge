@@ -361,6 +361,7 @@
 "Assets/Scripts/Character.cs"
 "Assets/Scripts/Character_Child.cs"
 "Assets/Scripts/Enemy.cs"
+"Assets/Scripts/FreeChar.cs"
 "Assets/Scripts/GameManager.cs"
 "Assets/Scripts/Library.cs"
 "Assets/Scripts/ManMark.cs"

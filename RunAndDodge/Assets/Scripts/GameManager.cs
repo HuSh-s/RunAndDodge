@@ -17,6 +17,7 @@ public class GameManager : MonoBehaviour
     public int HowMuchEnemy;
     public GameObject MainChar;
     public bool GameFinished;
+    bool ReachEnd;
 
     void Start()
     {
@@ -40,6 +41,8 @@ public class GameManager : MonoBehaviour
                 item.GetComponent<Enemy>().Animation_Trigger();
             }
         }
+        ReachEnd = true;
+        WarState();
     }
 
     void Update()
@@ -49,34 +52,37 @@ public class GameManager : MonoBehaviour
 
     void WarState()
     {
-        if (CurrentCharacterCount == 1 || HowMuchEnemy == 0)
+        if (ReachEnd)
         {
-            GameFinished = true;
-            foreach(var item in Enemys)
+            if (CurrentCharacterCount == 1 || HowMuchEnemy == 0)
             {
-                if (item.activeInHierarchy)
+                GameFinished = true;
+                foreach (var item in Enemys)
                 {
-                    item.GetComponent<Animator>().SetBool("Attack", false);
+                    if (item.activeInHierarchy)
+                    {
+                        item.GetComponent<Animator>().SetBool("Attack", false);
+                    }
                 }
-            }
 
-            foreach (var item in Characters)
-            {
-                if (item.activeInHierarchy)
+                foreach (var item in Characters)
                 {
-                    item.GetComponent<Animator>().SetBool("Attack", false);
+                    if (item.activeInHierarchy)
+                    {
+                        item.GetComponent<Animator>().SetBool("Attack", false);
+                    }
                 }
-            }
 
-            MainChar.GetComponent<Animator>().SetBool("Attack", false);
+                MainChar.GetComponent<Animator>().SetBool("Attack", false);
 
-            if (CurrentCharacterCount < HowMuchEnemy || CurrentCharacterCount == HowMuchEnemy)
-            {
-                Debug.Log("kaybettin");
-            }
-            else
-            {
-                Debug.Log("kazanadýn");
+                if (CurrentCharacterCount < HowMuchEnemy || CurrentCharacterCount == HowMuchEnemy)
+                {
+                    Debug.Log("kaybettin");
+                }
+                else
+                {
+                    Debug.Log("kazanadýn");
+                }
             }
         }
     }

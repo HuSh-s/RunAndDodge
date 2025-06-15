@@ -16,6 +16,8 @@ TagManager:
   - Hammer
   - Enemy
   - FinishTrigger
+  - Column
+  - FreeChar
   layers:
   - Default
   - TransparentFX
