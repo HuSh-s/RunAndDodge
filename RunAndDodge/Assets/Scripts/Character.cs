@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 
 public class Character : MonoBehaviour
@@ -10,10 +11,13 @@ public class Character : MonoBehaviour
     public Camera_ Cam;
     public bool ReachEnd;
     public GameObject CharDestination;
+    public Slider _Slider;
+    public GameObject EndPoint;
 
     void Start()
     {
-        
+        float distance = Vector3.Distance(transform.position, EndPoint.transform.position);
+        _Slider.maxValue = distance;
     }
 
     private void FixedUpdate()
@@ -28,9 +32,14 @@ public class Character : MonoBehaviour
         if (ReachEnd)
         {
             transform.position = Vector3.Lerp(transform.position, CharDestination.transform.position, .015f);
+            if(_Slider.value != 0)
+                _Slider.value -= .007f;
         }
         else
         {
+            float distance = Vector3.Distance(transform.position, EndPoint.transform.position);
+            _Slider.value = distance;
+
             if (Input.GetKey(KeyCode.Mouse0))
             {
                 if (Input.GetAxis("Mouse X") < 0)
