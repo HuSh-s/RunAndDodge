@@ -5,6 +5,7 @@ using UnityEngine.TextCore.Text;
 using Semih;
 using Unity.VisualScripting;
 using UnityEngine.UIElements;
+using static UnityEditor.Progress;
 
 public class GameManager : MonoBehaviour
 {
@@ -118,6 +119,7 @@ public class GameManager : MonoBehaviour
                 item.SetActive(true);
                 item.transform.position = position_;
                 item.GetComponent<ParticleSystem>().Play();
+                item.GetComponent<AudioSource>().Play();
                 if (!State_)
                     CurrentCharacterCount--;
                 else

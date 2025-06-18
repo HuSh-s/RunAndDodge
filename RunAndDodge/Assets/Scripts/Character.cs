@@ -65,7 +65,7 @@ public class Character : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag("Column") || collision.gameObject.CompareTag("SpikeBox") || collision.gameObject.CompareTag("PropellerSpikes"))
         {
@@ -75,4 +75,5 @@ public class Character : MonoBehaviour
                 transform.position = new Vector3(transform.position.x + .2f, transform.position.y, transform.position.z);
         }
     }
+
 }

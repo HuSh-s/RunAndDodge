@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using static UnityEditor.Progress;
 using static UnityEngine.GraphicsBuffer;
 
 public class FreeChar : MonoBehaviour
@@ -31,6 +32,7 @@ public class FreeChar : MonoBehaviour
             {
                 ChangedMaterial_AnimationTrigger();
                 Touch = true;
+                GetComponent<AudioSource>().Play();
             }
         }
 
