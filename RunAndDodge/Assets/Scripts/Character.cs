@@ -59,6 +59,10 @@ public class Character : MonoBehaviour
             _GameManager.EnemyTrigger();
             ReachEnd = true;
         }
+        else if (other.CompareTag("FreeChar"))
+        {
+            _GameManager.Characters.Add(other.gameObject);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)

@@ -55,5 +55,10 @@ public class Character_Child : MonoBehaviour
             _GameManager.DestroyEffect_Create(GivePosition(), false, false);
             gameObject.SetActive(false);
         }
+
+        else if (other.CompareTag("FreeChar"))
+        {
+            _GameManager.Characters.Add(other.gameObject);
+        }
     }
 }
