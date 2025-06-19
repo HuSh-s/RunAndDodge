@@ -7,9 +7,9 @@ using UnityEngine.UIElements;
 
 namespace Semih
 {
-    public class Math_Operations : MonoBehaviour
+    public class Math_Operations
     {
-        public static void Multiply(int GetNumber, List<GameObject> Characters, Transform position_, List<GameObject> CreateEffects_)
+        public void Multiply(int GetNumber, List<GameObject> Characters, Transform position_, List<GameObject> CreateEffects_)
         {
 
             int RepeatNumber = (GameManager.CurrentCharacterCount * GetNumber) - GameManager.CurrentCharacterCount;
@@ -45,7 +45,7 @@ namespace Semih
             GameManager.CurrentCharacterCount *= GetNumber;
 
         }
-        public static void Add(int GetNumber, List<GameObject> Characters, Transform position_, List<GameObject> CreateEffects_)
+        public void Add(int GetNumber, List<GameObject> Characters, Transform position_, List<GameObject> CreateEffects_)
         {
 
             int number2 = 0;
@@ -81,7 +81,7 @@ namespace Semih
 
 
         }
-        public static void Sub(int GetNumber, List<GameObject> Characters, List<GameObject> DestroyEffects_)
+        public void Sub(int GetNumber, List<GameObject> Characters, List<GameObject> DestroyEffects_)
         {
 
             if (GameManager.CurrentCharacterCount < GetNumber)
@@ -144,7 +144,7 @@ namespace Semih
                 GameManager.CurrentCharacterCount -= GetNumber;
             }
         }
-        public static void Divide(int GetNumber, List<GameObject> Characters, List<GameObject> DestroyEffects_)
+        public void Divide(int GetNumber, List<GameObject> Characters, List<GameObject> DestroyEffects_)
         {
             if (GameManager.CurrentCharacterCount <= GetNumber)
             {
@@ -220,6 +220,39 @@ namespace Semih
                     GameManager.CurrentCharacterCount += 2;
                 }
             }
+        }
+    }
+
+    public class MemoryManage
+    {
+        public void SaveData_string(string Key, string Value)
+        {
+            PlayerPrefs.SetString(Key, Value);
+            PlayerPrefs.Save();
+        }
+        public void SaveData_int(string Key, int Value)
+        {
+            PlayerPrefs.SetInt(Key, Value);
+            PlayerPrefs.Save();
+        }
+        public void SaveData_float(string Key, float Value)
+        {
+            PlayerPrefs.SetFloat(Key, Value);
+            PlayerPrefs.Save();
+        }
+
+
+        public string ReadData_S(string Key)
+        {
+            return PlayerPrefs.GetString(Key);
+        }
+        public int ReadData_I(string Key)
+        {
+            return PlayerPrefs.GetInt(Key);
+        }
+        public float ReadData_F(string Key)
+        {
+            return PlayerPrefs.GetFloat(Key);
         }
     }
 }

@@ -20,6 +20,9 @@ public class GameManager : MonoBehaviour
     public bool GameFinished;
     bool ReachEnd;
 
+    Math_Operations _Math_Operations = new Math_Operations();
+    MemoryManage _MemoryManage = new MemoryManage();
+
     void Start()
     {
         CreateEnemy();
@@ -82,6 +85,7 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
+                    _MemoryManage.SaveData_int("Score", _MemoryManage.ReadData_I("Score") + 600);
                     Debug.Log("kazanadýn");
                 }
             }
@@ -93,19 +97,19 @@ public class GameManager : MonoBehaviour
         switch (OperationType)
         {
             case "Multiply":
-                Math_Operations.Multiply(GetNumber, Characters, position_, CreateEffects);
+                _Math_Operations.Multiply(GetNumber, Characters, position_, CreateEffects);
                 break;
 
             case "Add":
-                Math_Operations.Add(GetNumber, Characters, position_, CreateEffects);
+                _Math_Operations.Add(GetNumber, Characters, position_, CreateEffects);
                 break;
 
             case "Sub":
-                Math_Operations.Sub(GetNumber, Characters, DestroyEffects);
+                _Math_Operations.Sub(GetNumber, Characters, DestroyEffects);
                 break;
 
             case "Divide":
-                Math_Operations.Divide(GetNumber, Characters, DestroyEffects);
+                _Math_Operations.Divide(GetNumber, Characters, DestroyEffects);
                 break;
         }
     }
