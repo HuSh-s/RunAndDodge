@@ -85,7 +85,16 @@ public class GameManager : MonoBehaviour
                 }
                 else
                 {
-                    _MemoryManage.SaveData_int("Score", _MemoryManage.ReadData_I("Score") + 600);
+                    if(CurrentCharacterCount > 5)
+                    {
+                        _MemoryManage.SaveData_int("Score", _MemoryManage.ReadData_I("Score") + 600);
+                        _MemoryManage.SaveData_int("EndLevel", _MemoryManage.ReadData_I("EndLevel") + 1);
+                    }
+                    else
+                    {
+                        _MemoryManage.SaveData_int("Score", _MemoryManage.ReadData_I("Score") + 200);
+                        _MemoryManage.SaveData_int("EndLevel", _MemoryManage.ReadData_I("EndLevel") + 1);
+                    }
                     Debug.Log("kazanadýn");
                 }
             }

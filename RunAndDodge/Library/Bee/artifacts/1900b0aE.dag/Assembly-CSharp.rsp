@@ -363,6 +363,7 @@
 "Assets/Scripts/Enemy.cs"
 "Assets/Scripts/FreeChar.cs"
 "Assets/Scripts/GameManager.cs"
+"Assets/Scripts/LevelManager.cs"
 "Assets/Scripts/Library.cs"
 "Assets/Scripts/MainMenuManager.cs"
 "Assets/Scripts/ManMark.cs"
