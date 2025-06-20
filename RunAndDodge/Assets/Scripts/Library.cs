@@ -254,5 +254,14 @@ namespace Semih
         {
             return PlayerPrefs.GetFloat(Key);
         }
+
+        public void ControlAndDefine()
+        {
+            if (!PlayerPrefs.HasKey("EndLevel"))
+            {
+                PlayerPrefs.SetInt("EndLevel", 5);
+                PlayerPrefs.SetInt("Score", 100);
+            }
+        }
     }
 }
