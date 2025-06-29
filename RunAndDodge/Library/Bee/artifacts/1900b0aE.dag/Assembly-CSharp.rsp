@@ -360,6 +360,7 @@
 "Assets/Scripts/Camera_.cs"
 "Assets/Scripts/Character.cs"
 "Assets/Scripts/Character_Child.cs"
+"Assets/Scripts/CustomizationManager.cs"
 "Assets/Scripts/Enemy.cs"
 "Assets/Scripts/FreeChar.cs"
 "Assets/Scripts/GameManager.cs"
