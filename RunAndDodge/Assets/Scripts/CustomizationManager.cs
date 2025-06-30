@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using Semih;
 using TMPro;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 public class CustomizationManager : MonoBehaviour
 {
     public TextMeshProUGUI ScoreText;
@@ -16,6 +18,8 @@ public class CustomizationManager : MonoBehaviour
     int HatIndex = -1;
 
     MemoryManage _MemoryManage = new MemoryManage();
+
+    public List<ItemInfos> _ItemInfos = new List<ItemInfos>();
 
     void Start()
     {
@@ -37,6 +41,8 @@ public class CustomizationManager : MonoBehaviour
             Hats[HatIndex].SetActive(true);
         }
 
+        Load();
+        Save();
     }
 
     public void Hat_Buttons(string _operator)
@@ -99,6 +105,30 @@ public class CustomizationManager : MonoBehaviour
             {
                 HatsButtons[1].interactable = true;
             }
+        }
+    }
+
+    public void Save()
+    {
+        _ItemInfos.Add(new ItemInfos());
+
+        BinaryFormatter bf = new BinaryFormatter();
+        FileStream file = File.Create(Application.persistentDataPath + "/ItemDatas.gd");
+
+        bf.Serialize(file, _ItemInfos);
+        file.Close();
+    }
+
+    public void Load()
+    {
+        if(File.Exists(Application.persistentDataPath + "/ItemDatas.gd"))
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.Open(Application.persistentDataPath + "/ItemDatas.gd", FileMode.Open);
+            _ItemInfos = (List<ItemInfos>)bf.Deserialize(file);
+            file.Close();
+
+            Debug.Log(_ItemInfos[1].Item_Name);
         }
     }
 

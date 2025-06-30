@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
+using System;
 
 
 namespace Semih
@@ -263,5 +264,20 @@ namespace Semih
                 PlayerPrefs.SetInt("Score", 100);
             }
         }
+    }
+
+    public class Datas
+    {
+        public static List<ItemInfos> _ItemInfos = new List<ItemInfos>();
+    }
+
+    [Serializable]
+    public class ItemInfos
+    {
+        public int Group_Index;
+        public int Item_Index;
+        public string Item_Name;
+        public int Score;
+        public bool PurchaseStatus;
     }
 }
