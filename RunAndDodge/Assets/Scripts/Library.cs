@@ -4,6 +4,8 @@ using UnityEngine;
 using UnityEngine.TextCore.Text;
 using UnityEngine.UIElements;
 using System;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
 
 
 namespace Semih
@@ -279,5 +281,48 @@ namespace Semih
         public string Item_Name;
         public int Score;
         public bool PurchaseStatus;
+    }
+
+    public class DataManage
+    {
+        List<ItemInfos> _ItemInfos2;
+        public void Save(List<ItemInfos> _ItemInfos)
+        {
+            BinaryFormatter bf = new BinaryFormatter();
+            FileStream file = File.OpenWrite(Application.persistentDataPath + "/ItemDatas.gd");
+
+            bf.Serialize(file, _ItemInfos);
+            file.Close();
+        }
+    
+        public void Load()
+        {
+            if (File.Exists(Application.persistentDataPath + "/ItemDatas.gd"))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Open(Application.persistentDataPath + "/ItemDatas.gd", FileMode.Open);
+
+                _ItemInfos2 = (List<ItemInfos>)bf.Deserialize(file);
+                file.Close();
+            }
+        }
+
+        public List<ItemInfos> GetList()
+        {
+            return _ItemInfos2;
+        }
+
+        public void FirstTimeCreateFile(List<ItemInfos> _ItemInfos)
+        {
+            if (!File.Exists(Application.persistentDataPath + "/ItemDatas.gd"))
+            {
+                BinaryFormatter bf = new BinaryFormatter();
+                FileStream file = File.Create(Application.persistentDataPath + "/ItemDatas.gd");
+
+                bf.Serialize(file, _ItemInfos);
+                file.Close();
+            }
+        }
+
     }
 }

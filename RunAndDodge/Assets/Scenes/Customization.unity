@@ -566,22 +566,7 @@ MonoBehaviour:
   HatsButtons:
   - {fileID: 1137448063}
   - {fileID: 24504604}
-  _ItemInfos:
-  - Group_Index: 1
-    Item_Index: 0
-    Item_Name: Hat 1
-    Score: 250
-    PurchaseStatus: 0
-  - Group_Index: 1
-    Item_Index: 1
-    Item_Name: Hat 2
-    Score: 480
-    PurchaseStatus: 0
-  - Group_Index: 0
-    Item_Index: 2
-    Item_Name: Hat 3
-    Score: 860
-    PurchaseStatus: 0
+  _ItemInfos: []
 --- !u!1 &588484054
 GameObject:
   m_ObjectHideFlags: 0

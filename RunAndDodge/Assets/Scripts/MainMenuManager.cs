@@ -8,9 +8,12 @@ public class MainMenuManager : MonoBehaviour
 {
     MemoryManage _MemoryManage = new MemoryManage();
     public GameObject ExitPanel;
+    public List<ItemInfos> _ItemInfos = new List<ItemInfos>();
+    DataManage _DataManage = new DataManage();
     void Start()
     {
         _MemoryManage.ControlAndDefine();
+        //_DataManage.FirstTimeCreateFile(_ItemInfos); all item if finished activate this
     }
 
     public void _LoadScence(int Index)

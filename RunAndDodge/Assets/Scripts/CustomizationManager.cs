@@ -18,13 +18,14 @@ public class CustomizationManager : MonoBehaviour
     int HatIndex = -1;
 
     MemoryManage _MemoryManage = new MemoryManage();
+    DataManage _DataManage = new DataManage();
 
     public List<ItemInfos> _ItemInfos = new List<ItemInfos>();
 
     void Start()
     {
         _MemoryManage.SaveData_int("SelectedHat", -1);
-        
+
         if (_MemoryManage.ReadData_I("SelectedHat") == -1)
         {
 
@@ -37,33 +38,37 @@ public class CustomizationManager : MonoBehaviour
         }
         else
         {
-            HatIndex = _MemoryManage.ReadData_I("SelectedHat"); 
+            HatIndex = _MemoryManage.ReadData_I("SelectedHat");
             Hats[HatIndex].SetActive(true);
         }
 
-        Load();
-        Save();
+       //_DataManage.Save(_ItemInfos);
+
+        _DataManage.Load();
+        _ItemInfos = _DataManage.GetList(); 
     }
 
     public void Hat_Buttons(string _operator)
     {
-        if(_operator == "Forward")
+        if (_operator == "Forward")
         {
-            if(HatIndex == -1)
+            if (HatIndex == -1)
             {
                 HatIndex = 0;
                 Hats[HatIndex].SetActive(true);
+                HatText.text = _ItemInfos[HatIndex].Item_Name;
             }
             else
             {
                 Hats[HatIndex].SetActive(false);
                 HatIndex++;
                 Hats[HatIndex].SetActive(true);
+                HatText.text = _ItemInfos[HatIndex].Item_Name;
             }
 
             //----------------------------
 
-            if(HatIndex == Hats.Length - 1)
+            if (HatIndex == Hats.Length - 1)
             {
                 HatsButtons[1].interactable = false;
             }
@@ -79,24 +84,27 @@ public class CustomizationManager : MonoBehaviour
         }
         else
         {
-            if(HatIndex!= -1)
+            if (HatIndex != -1)
             {
                 Hats[HatIndex].SetActive(false);
                 HatIndex--;
 
-                if(HatIndex != -1)
+                if (HatIndex != -1)
                 {
                     Hats[HatIndex].SetActive(true);
                     HatsButtons[0].interactable = true;
+                    HatText.text = _ItemInfos[HatIndex].Item_Name;
                 }
                 else
                 {
                     HatsButtons[0].interactable = false;
+                    HatText.text = "No Hat";
                 }
             }
             else
             {
                 HatsButtons[0].interactable = false;
+                HatText.text = "No Hat";
             }
 
             //----------------------------
@@ -108,32 +116,10 @@ public class CustomizationManager : MonoBehaviour
         }
     }
 
-    public void Save()
-    {
-        _ItemInfos.Add(new ItemInfos());
-
-        BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/ItemDatas.gd");
-
-        bf.Serialize(file, _ItemInfos);
-        file.Close();
-    }
-
-    public void Load()
-    {
-        if(File.Exists(Application.persistentDataPath + "/ItemDatas.gd"))
-        {
-            BinaryFormatter bf = new BinaryFormatter();
-            FileStream file = File.Open(Application.persistentDataPath + "/ItemDatas.gd", FileMode.Open);
-            _ItemInfos = (List<ItemInfos>)bf.Deserialize(file);
-            file.Close();
-
-            Debug.Log(_ItemInfos[1].Item_Name);
-        }
-    }
+   
 
     void Update()
     {
-        
+
     }
 }
