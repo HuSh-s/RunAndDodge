@@ -8,12 +8,20 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 public class CustomizationManager : MonoBehaviour
 {
+    public GameObject[] OperatorPanels;
+    public GameObject OperatorCanvas;
+    public GameObject[] GeneralObjects;
+    int ActiveOperatorPanelIndex;
+    [Header("TEXTS")]
     public TextMeshProUGUI ScoreText;
     public TextMeshProUGUI HatText;
+    [Header("HATS")]
     public GameObject[] Hats;
-    public GameObject[] Sticks;
-    public Material[] Materials;
     public Button[] HatsButtons;
+    [Header("STICKS")]
+    public GameObject[] Sticks;
+    [Header("MATERIALS")]
+    public Material[] Materials;
 
     int HatIndex = -1;
 
@@ -116,7 +124,21 @@ public class CustomizationManager : MonoBehaviour
         }
     }
 
-   
+   public void GetOperatorPanel(int Index)
+    {
+        GeneralObjects[2].SetActive(true);
+        ActiveOperatorPanelIndex = Index;
+        OperatorPanels[Index].SetActive(true);
+        GeneralObjects[3].SetActive(true);
+        OperatorCanvas.SetActive(false);
+    }
+    public void BackButton_()
+    {
+        GeneralObjects[2].SetActive(false);
+        OperatorCanvas.SetActive(true);
+        GeneralObjects[3].SetActive(false);
+        OperatorPanels[ActiveOperatorPanelIndex].SetActive(false);
+    }
 
     void Update()
     {
